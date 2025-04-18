@@ -1,3 +1,3 @@
 # takia5
 - recover all necessary files
-- auth
+- authed commit
