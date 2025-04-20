@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import takia5.playerClient.HexButton.ButtonLogo;
 import takia5.playerClient.HexButton.ButtonState;
+import takia5.playerClient.ui.CreateGameSave;
 // import takia5.playerClient.ui.UiContainer;
 // import takia5.playerClient.ui.CreateGameSave;
 import takia5.playerClient.ui.Div;
@@ -84,9 +85,8 @@ public class MenuScreen implements Screen {
     }
 
     public void createGame() {
-        // CreateGameSave com = new CreateGameSave();
-        // Tester com = new Tester();
-        // this.uiComponent = com;
+        CreateGameSave com = new CreateGameSave();
+        this.uiComponent = com;
     }
 
     public void loadGame() {
@@ -111,9 +111,9 @@ public class MenuScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
-        if (this.uiComponent != null) {
-            this.uiComponent.render();
-        }
+        // if (this.uiComponent != null) {
+        // this.uiComponent.render();
+        // }
     }
 
     @Override
