@@ -45,7 +45,7 @@ public class GameApp extends Game {
         //     change_screen(MenuScreen.class);
         // });
         initImgui(() -> {
-            System.out.println("已经完成初始化imgui");
+            System.out.println("imgui已初始化");
             change_screen(MenuScreen.class);
         });
     }
