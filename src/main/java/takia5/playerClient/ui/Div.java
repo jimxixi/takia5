@@ -1,5 +1,6 @@
 package takia5.playerClient.ui;
 
-public interface Div {
-
+public abstract class Div {
+    public boolean resize = false;
+    public abstract void render();
 }
