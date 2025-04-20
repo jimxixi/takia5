@@ -3,10 +3,10 @@ package takia5.playerClient;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletableFuture;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import imgui.ImFontAtlas;
@@ -34,22 +34,24 @@ public class GameApp extends Game {
         // change_screen(LogoScreen.class);
         LogoScreen logoScreen = new LogoScreen();
         setScreen(logoScreen);
-        CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
-            System.out.println("开始初始化imgui");
-            GameApp.initImgui();
-            System.out.println("imgui已初始化。");
-            return null;
-        });
-        // initImgui();
-        // setScreen(logoScreen);
-
-        future.thenRun(() -> {
-            System.out.println("imgui 初始化结束");
+        // CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
+        //     System.out.println("开始初始化imgui");
+        //     GameApp.initImgui();
+        //     System.out.println("imgui已初始化。");
+        //     return null;
+        // });
+        // future.thenRun(() -> {
+        //     System.out.println("imgui 初始化结束");
+        //     change_screen(MenuScreen.class);
+        // });
+        initImgui(() -> {
+            System.out.println("已经完成初始化imgui");
             change_screen(MenuScreen.class);
         });
     }
 
-    public static void initImgui() {
+    public static void initImgui(Runnable callback) {
+        System.out.println("开始初始化imgui");
         imGuiGlfw = new ImGuiImplGlfw();
         imGuiGl3 = new ImGuiImplGl3();
         long windowHandle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
@@ -61,26 +63,28 @@ public class GameApp extends Game {
         // io.getFonts().setFreeTypeRenderer(true);
         imGuiGlfw.init(windowHandle, true);
         imGuiGl3.init("#version 410");
-
-        // 加载OTF字体
-        ImFontAtlas fontAtlas = io.getFonts();
-        fontAtlas.setFreeTypeRenderer(true);
-        ImFontConfig fontConfig = new ImFontConfig();
-        fontConfig.setGlyphRanges(new short[] { 0x0020, (short) 0xffff, 0, });
-
-        // fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
-        fontAtlas.addFontFromFileTTF(Main.ResPath + "uiskin/unifont-16.0.02.otf", 24, fontConfig);
-        fontConfig.destroy();
-
-        fontAtlas.build();
-
-        ImGui.styleColorsDark();
-        ImGuiStyle style = ImGui.getStyle();
-        style.setWindowBorderSize(1f);
-        style.setWindowRounding(10f);
-
-        style.setColor(ImGuiCol.Border, 0f, 1f, 0f, 1f);
-
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            // 加载OTF字体
+            ImFontAtlas fontAtlas = io.getFonts();
+            fontAtlas.setFreeTypeRenderer(true);
+            ImFontConfig fontConfig = new ImFontConfig();
+            fontConfig.setGlyphRanges(new short[] { 0x0020, (short) 0xffff, 0, });
+    
+            // fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+            fontAtlas.addFontFromFileTTF(Main.ResPath + "uiskin/unifont-16.0.02.otf", 24, fontConfig);
+            fontConfig.destroy();
+    
+            fontAtlas.build();
+    
+            ImGui.styleColorsDark();
+            ImGuiStyle style = ImGui.getStyle();
+            style.setWindowBorderSize(1f);
+            style.setWindowRounding(10f);
+    
+            style.setColor(ImGuiCol.Border, 0f, 1f, 0f, 1f);
+        });
+        System.out.println("正在初始化imgui");
+        future.thenRun(callback);
         // startImGui();
         // endImGui();
     }
