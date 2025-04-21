@@ -11,8 +11,20 @@ public abstract class NinePatchDiv {
     public int left;
     public int top;
 
-    public NinePatchDiv() {
+    public enum Corner {
+        LEFTTOP, RIGHTTOP,
+        LEFTBOTTOM, RIGHTBOTTOM
+    }
 
+    public NinePatchDiv(int width, int height, Corner corner, int margin) {
+        this.width = width - (margin * 2);
+        this.height = height - (margin * 2);
+        if (corner == Corner.LEFTTOP) {
+            left = margin;
+            top = margin;
+        } else if (corner == Corner.RIGHTTOP) {
+            left;
+        }
     }
 
     public abstract void onLoad();
@@ -24,12 +36,12 @@ public abstract class NinePatchDiv {
     }
 
     public void render() {
-        if (!loaded) {
-            loaded = true;
-            onLoad();
-        }
         if (show) {
             GameApp.startImGui();
+            if (!loaded) {
+                loaded = true;
+                onLoad();
+            }
             drawComponent();
             GameApp.endImGui();
         }

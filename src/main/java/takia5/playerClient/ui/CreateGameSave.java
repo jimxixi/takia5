@@ -24,6 +24,7 @@ public class CreateGameSave extends NinePatchDiv {
     private float windowHeight;
 
     public CreateGameSave() {
+        super(800, 600, NinePatchDiv.Corner.LEFTTOP, 32);
     }
 
     @Override
