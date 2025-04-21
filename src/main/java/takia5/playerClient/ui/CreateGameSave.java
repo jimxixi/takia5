@@ -1,9 +1,6 @@
 package takia5.playerClient.ui;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -21,7 +18,7 @@ import takia5.playerClient.Main;
 import takia5.playerClient.MenuScreen;
 import takia5.utils.GameSaveUtil;
 
-public class CreateGameSave extends Div {
+public class CreateGameSave extends NinePatchDiv {
     private ImString saveName = new ImString(30);
     private float windowWidth;
     private float windowHeight;
@@ -152,8 +149,8 @@ public class CreateGameSave extends Div {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File sourceFile = new File(Main.ResPath + "saveTemplate.sqlite");
-        File destFile = new File(Main.SavePath + saveName + ".sqlite");
+        // File sourceFile = new File(Main.ResPath + "saveTemplate.sqlite");
+        // File destFile = new File(Main.SavePath + saveName + ".sqlite");
         // try {
         // Files.copy(sourceFile.toPath(), destFile.t
         // }

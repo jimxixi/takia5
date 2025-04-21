@@ -2,14 +2,18 @@ package takia5.playerClient.ui;
 
 import takia5.playerClient.GameApp;
 
-public abstract class Div {
+public abstract class NinePatchDiv {
     public boolean loaded = false;
     public boolean resize = false;
-    public boolean show = false;
-    public int width = 200;
-    public int height = 200;
+    public boolean show = true;
+    public int width;
+    public int height;
     public int left;
     public int top;
+
+    public NinePatchDiv() {
+
+    }
 
     public abstract void onLoad();
 
