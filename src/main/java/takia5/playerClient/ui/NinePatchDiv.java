@@ -1,5 +1,7 @@
 package takia5.playerClient.ui;
 
+import com.badlogic.gdx.Gdx;
+
 import takia5.playerClient.GameApp;
 
 public abstract class NinePatchDiv {
@@ -23,7 +25,14 @@ public abstract class NinePatchDiv {
             left = margin;
             top = margin;
         } else if (corner == Corner.RIGHTTOP) {
-            left;
+            left = Gdx.graphics.getWidth() - width;
+            top = margin;
+        } else if (corner == Corner.LEFTBOTTOM) {
+            left = margin;
+            top = Gdx.graphics.getHeight() - height;
+        } else if (corner == Corner.RIGHTBOTTOM) {
+            left = Gdx.graphics.getWidth() - width;
+            top = Gdx.graphics.getHeight() - height;
         }
     }
 
