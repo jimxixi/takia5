@@ -19,8 +19,8 @@ public class Main {
     public static void main(String[] args) {
         if (new File("D:/takia/takia_resource/").exists()) {
         } else {
-            ResPath = "E:/takia/takia_resource/";
-            SavePath = "E:/takia/takia_gamesave/";
+            ResPath = "C:/takia/takia_resource/";
+            SavePath = "C:/takia/takia_gamesave/";
         }
 
         Lwjgl3ApplicationConfiguration configuration = new Lwjgl3ApplicationConfiguration();
