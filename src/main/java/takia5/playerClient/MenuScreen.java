@@ -15,7 +15,7 @@ import takia5.playerClient.HexButton.ButtonState;
 import takia5.playerClient.ui.CreateGameSave;
 // import takia5.playerClient.ui.UiContainer;
 // import takia5.playerClient.ui.CreateGameSave;
-import takia5.playerClient.ui.Div;
+import takia5.playerClient.ui.NinePatchDiv;
 // import takia5.playerClient.ui.GameSaveList;
 // import takia5.playerClient.ui.SettingsUI;
 
@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
     public HashMap<ButtonLogo, Texture> logoMap = new HashMap<HexButton.ButtonLogo, Texture>();
     public Group menuGroup = new Group();
 
-    public Div uiComponent;
+    public NinePatchDiv uiComponent;
 
     public MenuScreen() {
         super();
@@ -111,9 +111,10 @@ public class MenuScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
-        // if (this.uiComponent != null) {
-        // this.uiComponent.render();
-        // }
+        if (this.uiComponent != null) {
+            this.uiComponent.render();
+            this.uiComponent.render();
+        }
     }
 
     @Override
