@@ -19,6 +19,7 @@ public abstract class NinePatchDiv {
     }
 
     public NinePatchDiv(int width, int height, Corner corner, int margin) {
+        // TODO 宽高改成百分比
         this.width = width - (margin * 2);
         this.height = height - (margin * 2);
         if (corner == Corner.LEFTTOP) {

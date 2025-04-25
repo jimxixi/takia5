@@ -12,12 +12,12 @@ public class Main {
     /**
      * 资源文件路径 游戏存档路径 开发暂时写死 后续改成获取exe所在路径
      */
-    public static String ResPath = "D:/takia/takia_resource/";
-    public static String SavePath = "D:/takia/takia_gamesave/";
+    public static String ResPath = "D:/thehellos/takia/takia_resource/";
+    public static String SavePath = "D:/thehellos/takia/takia_gamesave/";
     // public static String ResPath = "./";
 
     public static void main(String[] args) {
-        if (new File("D:/takia/takia_resource/").exists()) {
+        if (new File("D:/thehellos/takia/takia_resource/").exists()) {
         } else {
             ResPath = "C:/takia/takia_resource/";
             SavePath = "C:/takia/takia_gamesave/";

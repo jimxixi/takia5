@@ -25,11 +25,11 @@ public class CreateGameSave extends NinePatchDiv {
 
     public CreateGameSave() {
         super(800, 600, NinePatchDiv.Corner.LEFTTOP, 32);
+        saveName.set("HelloTakia汉字！!");
     }
 
     @Override
     public void onLoad() {
-        saveName.set("HelloTakia汉字！!");
 
         // 设置弹窗大小和位置
         this.windowWidth = 800.0f;
