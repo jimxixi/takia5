@@ -18,10 +18,9 @@ public abstract class NinePatchDiv {
         LEFTBOTTOM, RIGHTBOTTOM
     }
 
-    public NinePatchDiv(int width, int height, Corner corner, int margin) {
-        // TODO 宽高改成百分比
-        this.width = width - (margin * 2);
-        this.height = height - (margin * 2);
+    public NinePatchDiv(int widthPP, int heightPP, Corner corner, int margin) {
+        this.width = Gdx.graphics.getWidth() * (widthPP / 100) - (margin * 2);
+        this.height = Gdx.graphics.getHeight() * (heightPP / 100) - (margin * 2);
         if (corner == Corner.LEFTTOP) {
             left = margin;
             top = margin;
