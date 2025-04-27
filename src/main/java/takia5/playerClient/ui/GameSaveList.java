@@ -2,16 +2,13 @@ package takia5.playerClient.ui;
 
 public class GameSaveList extends NinePatchDiv {
 
-    public GameSaveList(int width, int height, Corner corner, int margin) {
-        super(width, height, corner, margin);
+    public GameSaveList() {
+        super(50, 50, Corner.LEFTTOP, 8);
     }
 
     @Override
-    public void onLoad() {
-    }
-
-    @Override
-    public void onResize() {
+    public void drawComponent() {
+        System.out.println("");
     }
 
 }

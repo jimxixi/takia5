@@ -20,38 +20,19 @@ import takia5.utils.GameSaveUtil;
 
 public class CreateGameSave extends NinePatchDiv {
     private ImString saveName = new ImString(30);
-    private float windowWidth;
-    private float windowHeight;
 
     public CreateGameSave() {
-        super(800, 600, NinePatchDiv.Corner.LEFTTOP, 32);
+        super(800, 600, NinePatchDiv.Corner.CENTER, 16);
         saveName.set("HelloTakia汉字！!");
     }
 
     @Override
     public void onLoad() {
 
-        // 设置弹窗大小和位置
-        this.windowWidth = 800.0f;
-        this.windowHeight = 400.0f;
-        ImGui.setNextWindowSize(windowWidth, windowHeight);
-        ImGui.setNextWindowPos((Gdx.graphics.getWidth() - windowWidth) / 2,
-                (Gdx.graphics.getHeight() - windowHeight) / 2);
-
-    }
-
-    @Override
-    public void onResize() {
-        windowWidth = (Gdx.graphics.getWidth() / 2) - 64;
-        windowHeight = Gdx.graphics.getHeight() - 64;
-        ImGui.setNextWindowSize(windowWidth, windowHeight);
-        ImGui.setNextWindowPos((Gdx.graphics.getWidth() - windowWidth) / 2,
-                (Gdx.graphics.getHeight() - windowHeight) / 2);
     }
 
     @Override
     public void drawComponent() {
-        super.drawComponent();
         boolean createdButtonDisabled = false;
         // 创建ImGui界面
         if (ImGui.begin("Save Game啦啦啦にほ", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar)) {

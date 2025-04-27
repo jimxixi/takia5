@@ -123,7 +123,8 @@ public class MenuScreen implements Screen {
         if (this.uiComponent != null) {
             // String uiClass = this.uiComponent.getClass().getName();
             // 为component实现一种自动resize的机制
-            this.uiComponent.resize = true;
+//            this.uiComponent.resize = true;
+            this.uiComponent.onResize();
         }
     }
 
