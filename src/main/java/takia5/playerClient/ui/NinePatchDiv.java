@@ -3,26 +3,27 @@ package takia5.playerClient.ui;
 import com.badlogic.gdx.Gdx;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiCond;
 import takia5.playerClient.GameApp;
 
 public abstract class NinePatchDiv {
     public boolean loaded = false;
-    // public boolean resize = false;
+     public boolean resize = false;
     public boolean show = true;
     public int widthPP;
     public int heightPP;
-    public int left;
-    public int top;
-    public int margin;
+    public float left;
+    public float top;
+    public float margin;
     public Corner corner;
 
     public enum Corner {
-        LEFTTOP, RIGHTTOP, LEFTBOTTOM, RIGHTBOTTOM, CENTER, 
+        LEFTTOP, RIGHTTOP, LEFTBOTTOM, RIGHTBOTTOM, CENTER,
     }
 
     public NinePatchDiv(int widthPP, int heightPP, Corner corner, int margin) {
-//        this.width = Gdx.graphics.getWidth() * (widthPP / 100) - (margin * 2);
-//        this.height = Gdx.graphics.getHeight() * (heightPP / 100) - (margin * 2);
+        // this.width = Gdx.graphics.getWidth() * (widthPP / 100) - (margin * 2);
+        // this.height = Gdx.graphics.getHeight() * (heightPP / 100) - (margin * 2);
         this.widthPP = widthPP;
         this.heightPP = heightPP;
         this.corner = corner;
@@ -34,28 +35,29 @@ public abstract class NinePatchDiv {
     }
 
     public void onResize() {
-        int width = Gdx.graphics.getWidth() * (widthPP / 100) - (margin * 2);;
-        int height = Gdx.graphics.getHeight() * (heightPP / 100) - (margin * 2);
+        float width = (Gdx.graphics.getWidth() * (widthPP / 100f)) - (2 * margin);
+        float height = (Gdx.graphics.getHeight() * (heightPP / 100f)) - (2 * margin);
         if (corner == Corner.LEFTTOP) {
-            left = margin + margin;
-            top = margin + margin;
+            left = margin;
+            top = margin;
         } else if (corner == Corner.RIGHTTOP) {
-            left = Gdx.graphics.getWidth() - width + margin;
-            top = margin + margin;
+            left = Gdx.graphics.getWidth() - width - margin;
+            top = margin;
         } else if (corner == Corner.LEFTBOTTOM) {
-            left = margin + margin;
-            top = Gdx.graphics.getHeight() - height + margin;
+            left = margin;
+            top = Gdx.graphics.getHeight() - height - margin;
         } else if (corner == Corner.RIGHTBOTTOM) {
-            left = Gdx.graphics.getWidth() - width + margin;
-            top = Gdx.graphics.getHeight() - height + margin;
+            left = Gdx.graphics.getWidth() - width - margin;
+            top = Gdx.graphics.getHeight() - height - margin;
         } else if (corner == Corner.CENTER) {
-//            left = Gdx.graphics.getWidth() * (100 - widthPP) / 2;
-//            top = Gdx.graphics.getHeight() * (100 - heightPP) / 2;
-            left = 0;
-            top = 0;
+            left = Gdx.graphics.getWidth() * (100 - widthPP) / 200f + margin;
+            top = Gdx.graphics.getHeight() * (100 - heightPP) / 200f + margin;
         }
-        ImGui.setNextWindowSize(width, height);
-        ImGui.setNextWindowPos(left, top);
+        System.out.println("resize: " + width + ":" + height + ", " + left + ":" + top + ".");
+        ImGui.setNextWindowSize(width, height, ImGuiCond.Always);
+        ImGui.setNextWindowPos(left, top, ImGuiCond.Always);
+//        ImGui.setWindowSize(width, height);
+//        ImGui.setWindowPos(left, top);
 
     }
 
@@ -67,6 +69,10 @@ public abstract class NinePatchDiv {
             if (!loaded) {
                 loaded = true;
                 onLoad();
+            }
+            if (resize) {
+                onResize();
+                resize = false;
             }
             drawComponent();
             GameApp.endImGui();

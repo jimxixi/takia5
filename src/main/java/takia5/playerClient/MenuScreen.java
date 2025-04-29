@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import takia5.playerClient.HexButton.ButtonLogo;
 import takia5.playerClient.HexButton.ButtonState;
 import takia5.playerClient.ui.CreateGameSave;
+import takia5.playerClient.ui.GameSaveList;
 // import takia5.playerClient.ui.UiContainer;
 // import takia5.playerClient.ui.CreateGameSave;
 import takia5.playerClient.ui.NinePatchDiv;
@@ -90,8 +91,8 @@ public class MenuScreen implements Screen {
     }
 
     public void loadGame() {
-        // GameSaveList com = new GameSaveList();
-        // this.uiComponent = com;
+         GameSaveList com = new GameSaveList();
+         this.uiComponent = com;
     }
 
     public void settingGame() {
@@ -110,11 +111,11 @@ public class MenuScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
-
         if (this.uiComponent != null) {
             this.uiComponent.render();
             this.uiComponent.render();
         }
+
     }
 
     @Override
@@ -124,7 +125,7 @@ public class MenuScreen implements Screen {
             // String uiClass = this.uiComponent.getClass().getName();
             // 为component实现一种自动resize的机制
 //            this.uiComponent.resize = true;
-            this.uiComponent.onResize();
+            this.uiComponent.resize = true;
         }
     }
 

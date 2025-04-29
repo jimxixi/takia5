@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,11 +24,12 @@ import imgui.glfw.ImGuiImplGlfw;
  * 主界面
  */
 public class GameApp extends Game {
-    public static Skin skin;
+//    public static Skin skin;
     static public ImGuiImplGlfw imGuiGlfw;
     static public ImGuiImplGl3 imGuiGl3;
     static public Screen nextScreen;
     static public boolean nextScreenReady = false;
+//    static public InputProcessor tmpProcessor;
 
     @Override
     public void create() {
@@ -90,6 +92,10 @@ public class GameApp extends Game {
     }
 
     public static void startImGui() {
+//        if (tmpProcessor != null) {
+//            Gdx.input.setInputProcessor(tmpProcessor);
+//            tmpProcessor = null;
+//        }
         imGuiGl3.newFrame();
         imGuiGlfw.newFrame();
         ImGui.newFrame();
@@ -97,10 +103,17 @@ public class GameApp extends Game {
     }
 
     public static void endImGui() {
+        ImGui.endFrame();
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
-        ImGui.endFrame();
         // System.out.println("end");
+
+        // If ImGui wants to capture the input, disable libGDX's input processor
+//        if (ImGui.getIO().getWantCaptureKeyboard() || ImGui.getIO().getWantCaptureMouse()) {
+//            System.out.println("input");
+//           tmpProcessor = Gdx.input.getInputProcessor();
+//           Gdx.input.setInputProcessor(null);
+//        }
     }
 
     @Override

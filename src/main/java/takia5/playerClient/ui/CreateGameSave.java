@@ -19,30 +19,38 @@ import takia5.playerClient.MenuScreen;
 import takia5.utils.GameSaveUtil;
 
 public class CreateGameSave extends NinePatchDiv {
-    private ImString saveName = new ImString(30);
+//    private ImString saveName = new ImString(30);
+    private String saveNameString = "HelloTakia汉字！!";
+    private int maxLength = 30;
 
     public CreateGameSave() {
-        super(800, 600, NinePatchDiv.Corner.CENTER, 16);
-        saveName.set("HelloTakia汉字！!");
+        super(40, 40, NinePatchDiv.Corner.CENTER, 8);
+//        System.out.println(Arrays.toString(saveName.getData()));
+//        saveName.set("HelloTakia汉字！!");
+//        System.out.println(Arrays.toString(saveName.getData()));
     }
 
     @Override
     public void onLoad() {
-
+        super.onLoad();
     }
 
     @Override
     public void drawComponent() {
         boolean createdButtonDisabled = false;
+        ImString saveName = new ImString(saveNameString, maxLength);
         // 创建ImGui界面
         if (ImGui.begin("Save Game啦啦啦にほ", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar)) {
             ImGui.text("Enter save name输入存档名称:");
             // ImGui.text("saveName: ");
             // ImGui.sameLine();
             if (ImGui.inputText("##saveName", saveName)) {
+                saveNameString = saveName.get();
                 // ImGui.newLine();
+//                System.out.println("render input");
             } else {
-                if (!isValidFolderName(saveName.get())) {
+//                System.out.println("else");
+                if (!isValidFolderName(saveNameString)) {
                     // 获取当前光标位置
                     ImVec2 cursorPos = ImGui.getCursorPos();
                     // 设置红色字体
@@ -54,14 +62,14 @@ public class CreateGameSave extends NinePatchDiv {
                     // 恢复光标位置
                     ImGui.setCursorPos(cursorPos);
                     createdButtonDisabled = true;
-                } else if (saveName.get().getBytes().length >= saveName.getBufferSize() - 1) {
+                } else if (saveNameString.getBytes().length >= maxLength - 1) {
                     ImVec2 cursorPos = ImGui.getCursorPos();
                     ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
                     ImGui.text("too long"); // 恢复字体颜色
                     ImGui.popStyleColor();
                     ImGui.setCursorPos(cursorPos);
                     createdButtonDisabled = true;
-                } else if (isNameUsed(saveName.get())) {
+                } else if (isNameUsed(saveNameString)) {
                     ImVec2 cursorPos = ImGui.getCursorPos();
                     ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
                     ImGui.text("name used"); // 恢复字体颜色
@@ -95,8 +103,8 @@ public class CreateGameSave extends NinePatchDiv {
                 setShow(false);
             }
             // ImGui.newLine();
-            ImGui.end();
         }
+        ImGui.end();
 
     }
 
