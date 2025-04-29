@@ -19,15 +19,15 @@ import takia5.playerClient.MenuScreen;
 import takia5.utils.GameSaveUtil;
 
 public class CreateGameSave extends NinePatchDiv {
-//    private ImString saveName = new ImString(30);
+    // private ImString saveName = new ImString(30);
     private String saveNameString = "HelloTakia汉字！!";
     private int maxLength = 30;
 
     public CreateGameSave() {
         super(40, 40, NinePatchDiv.Corner.CENTER, 8);
-//        System.out.println(Arrays.toString(saveName.getData()));
-//        saveName.set("HelloTakia汉字！!");
-//        System.out.println(Arrays.toString(saveName.getData()));
+        // System.out.println(Arrays.toString(saveName.getData()));
+        // saveName.set("HelloTakia汉字！!");
+        // System.out.println(Arrays.toString(saveName.getData()));
     }
 
     @Override
@@ -35,6 +35,8 @@ public class CreateGameSave extends NinePatchDiv {
         super.onLoad();
     }
 
+    // 相信就是迷信 语言就是谎言 感觉就是幻觉
+    // 宗教就是邪教 理解就是曲解 公有就是私有
     @Override
     public void drawComponent() {
         boolean createdButtonDisabled = false;
@@ -47,9 +49,9 @@ public class CreateGameSave extends NinePatchDiv {
             if (ImGui.inputText("##saveName", saveName)) {
                 saveNameString = saveName.get();
                 // ImGui.newLine();
-//                System.out.println("render input");
+                // System.out.println("render input");
             } else {
-//                System.out.println("else");
+                // System.out.println("else");
                 if (!isValidFolderName(saveNameString)) {
                     // 获取当前光标位置
                     ImVec2 cursorPos = ImGui.getCursorPos();
