@@ -11,6 +11,7 @@ import imgui.ImColor;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiInputTextFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImString;
 import takia5.playerClient.GameApp;
@@ -21,7 +22,8 @@ import takia5.utils.GameSaveUtil;
 public class CreateGameSave extends NinePatchDiv {
     // private ImString saveName = new ImString(30);
     private String saveNameString = "HelloTakia汉字！!";
-    private int maxLength = 30;
+    private int maxLength = 128;
+    ImString saveName = new ImString(saveNameString, maxLength);
 
     public CreateGameSave() {
         super(40, 40, NinePatchDiv.Corner.CENTER, 8);
@@ -40,47 +42,50 @@ public class CreateGameSave extends NinePatchDiv {
     @Override
     public void drawComponent() {
         boolean createdButtonDisabled = false;
-        ImString saveName = new ImString(saveNameString, maxLength);
+//        saveNameString = saveName.get();
         // 创建ImGui界面
         if (ImGui.begin("Save Game啦啦啦にほ", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar)) {
-            ImGui.text("Enter save name输入存档名称:");
+            ImGui.text("Enter save name输入存档名称: " + Gdx.graphics.getFramesPerSecond());
             // ImGui.text("saveName: ");
             // ImGui.sameLine();
-            if (ImGui.inputText("##saveName", saveName)) {
-                saveNameString = saveName.get();
+            ImGui.inputTextWithHint("SaveName", "hint", saveName);
+            
+            if (ImGui.inputTextWithHint("##saveName", "game save name", saveName)) {
+
                 // ImGui.newLine();
-                // System.out.println("render input");
+//                 System.out.println("render input: " + saveName.get());
             } else {
                 // System.out.println("else");
-                if (!isValidFolderName(saveNameString)) {
-                    // 获取当前光标位置
-                    ImVec2 cursorPos = ImGui.getCursorPos();
-                    // 设置红色字体
-                    ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(255, 0, 0, 255)); //
-                    // 显示提示文字
-                    // ImGui.sameLine();
-                    ImGui.text("invalid filename"); // 恢复字体颜色
-                    ImGui.popStyleColor();
-                    // 恢复光标位置
-                    ImGui.setCursorPos(cursorPos);
-                    createdButtonDisabled = true;
-                } else if (saveNameString.getBytes().length >= maxLength - 1) {
-                    ImVec2 cursorPos = ImGui.getCursorPos();
-                    ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
-                    ImGui.text("too long"); // 恢复字体颜色
-                    ImGui.popStyleColor();
-                    ImGui.setCursorPos(cursorPos);
-                    createdButtonDisabled = true;
-                } else if (isNameUsed(saveNameString)) {
-                    ImVec2 cursorPos = ImGui.getCursorPos();
-                    ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
-                    ImGui.text("name used"); // 恢复字体颜色
-                    ImGui.popStyleColor();
-                    ImGui.setCursorPos(cursorPos);
-                    createdButtonDisabled = true;
-                } else {
-                    // System.out.println(isNameUsed(saveName.get()));
-                }
+            }
+            saveNameString = saveName.get();
+            if (!isValidFolderName(saveNameString)) {
+                // 获取当前光标位置
+                ImVec2 cursorPos = ImGui.getCursorPos();
+                // 设置红色字体
+                ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(255, 0, 0, 255)); //
+                // 显示提示文字
+                // ImGui.sameLine();
+                ImGui.text("invalid filename"); // 恢复字体颜色
+                ImGui.popStyleColor();
+                // 恢复光标位置
+                ImGui.setCursorPos(cursorPos);
+                createdButtonDisabled = true;
+            } else if (saveNameString.getBytes().length >= maxLength - 1) {
+                ImVec2 cursorPos = ImGui.getCursorPos();
+                ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
+                ImGui.text("too long"); // 恢复字体颜色
+                ImGui.popStyleColor();
+                ImGui.setCursorPos(cursorPos);
+                createdButtonDisabled = true;
+            } else if (isNameUsed(saveNameString)) {
+                ImVec2 cursorPos = ImGui.getCursorPos();
+                ImGui.pushStyleColor(ImGuiCol.Text, ImColor.rgba(96, 96, 96, 255));
+                ImGui.text("name used"); // 恢复字体颜色
+                ImGui.popStyleColor();
+                ImGui.setCursorPos(cursorPos);
+                createdButtonDisabled = true;
+            } else {
+                // System.out.println(isNameUsed(saveName.get()));
             }
             ImGui.newLine();
             if (createdButtonDisabled) {

@@ -60,6 +60,8 @@ public class GameApp extends Game {
         ImGui.createContext();
         ImGuiIO io = ImGui.getIO();
         io.setIniFilename(null);
+        System.out.println(io.getKeyRepeatDelay());
+        io.setKeyRepeatDelay(1);
         // io.getFonts().addFontDefault();
         // io.getFonts().build();
         // io.getFonts().setFreeTypeRenderer(true);
