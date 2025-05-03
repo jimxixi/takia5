@@ -1,6 +1,8 @@
 package takia5.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +22,29 @@ import takia5.playerClient.Main;
  * 目前暂时采用全局静态方法的思路，每个方法都自己创建和销毁所有资源。 因为我也不知道这些资源将在什么时候用到，又会用到多少。
  */
 public class GameSaveUtil {
+    public static boolean createGameSave(String saveName) {
+        // File file = new File(Main.ResPath + "saveTemplate.sqlite");
+        File sourceFile = new File(Main.ResPath + "saveTemplate.sqlite");
+        File destFile = new File(Main.SavePath + saveName + ".sqlite");
+        if (sourceFile.exists()) {
+
+            try (FileInputStream fis = new FileInputStream(sourceFile);
+                    FileOutputStream fos = new FileOutputStream(destFile)) {
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = fis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, length);
+                }
+                System.out.println("File copied successfully!");
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return false;
+    }
+
     /**
      * 初始化存档，更新元信息
      * 

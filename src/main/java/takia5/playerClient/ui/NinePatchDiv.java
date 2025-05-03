@@ -8,10 +8,12 @@ import takia5.playerClient.GameApp;
 
 public abstract class NinePatchDiv {
     public boolean loaded = false;
-     public boolean resize = false;
+    public boolean resize = false;
     public boolean show = true;
     public int widthPP;
     public int heightPP;
+    public float width;
+    public float height;
     public float left;
     public float top;
     public float margin;
@@ -35,8 +37,8 @@ public abstract class NinePatchDiv {
     }
 
     public void onResize() {
-        float width = (Gdx.graphics.getWidth() * (widthPP / 100f)) - (2 * margin);
-        float height = (Gdx.graphics.getHeight() * (heightPP / 100f)) - (2 * margin);
+        width = (Gdx.graphics.getWidth() * (widthPP / 100f)) - (2 * margin);
+        height = (Gdx.graphics.getHeight() * (heightPP / 100f)) - (2 * margin);
         if (corner == Corner.LEFTTOP) {
             left = margin;
             top = margin;
@@ -56,8 +58,8 @@ public abstract class NinePatchDiv {
         System.out.println("resize: " + width + ":" + height + ", " + left + ":" + top + ".");
         ImGui.setNextWindowSize(width, height, ImGuiCond.Always);
         ImGui.setNextWindowPos(left, top, ImGuiCond.Always);
-//        ImGui.setWindowSize(width, height);
-//        ImGui.setWindowPos(left, top);
+        // ImGui.setWindowSize(width, height);
+        // ImGui.setWindowPos(left, top);
 
     }
 

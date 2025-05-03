@@ -6,10 +6,8 @@ import java.util.concurrent.CompletableFuture;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import imgui.ImFontAtlas;
 import imgui.ImFontConfig;
 import imgui.ImGui;
