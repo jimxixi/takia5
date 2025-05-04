@@ -65,8 +65,12 @@ class TakiaInputProcessor implements InputProcessor {
 }
 
 public class TakiaScreen implements Screen {
-    SceneTree sceneTree = new SceneTree();
+    SceneTree sceneTree;
     InputProcessor inputProcessor = new TakiaInputProcessor();
+
+    public TakiaScreen() {
+        sceneTree = new SceneTree();
+    }
 
     @Override
     public void show() {
