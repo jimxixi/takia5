@@ -56,7 +56,6 @@ public class GameSaveList extends NinePatchDiv {
                     hoveringSaveName = gameSave.get("name");
                     ImGui.setMouseCursor(ImGuiMouseCursor.Hand);
                 } else {
-                    // ImGui.setMouseCursor(ImGuiMouseCursor);
                     if (hoveringSaveName.equals(gameSave.get("name"))) {
                         hoveringSaveName = "";
                     }

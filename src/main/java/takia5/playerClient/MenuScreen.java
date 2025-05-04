@@ -14,6 +14,7 @@ import takia5.playerClient.HexButton.ButtonLogo;
 import takia5.playerClient.HexButton.ButtonState;
 import takia5.playerClient.ui.CreateGameSave;
 import takia5.playerClient.ui.GameSaveList;
+import takia5.playerClient.ui.GameSettings;
 // import takia5.playerClient.ui.UiContainer;
 // import takia5.playerClient.ui.CreateGameSave;
 import takia5.playerClient.ui.NinePatchDiv;
@@ -96,8 +97,8 @@ public class MenuScreen implements Screen {
     }
 
     public void settingGame() {
-        // SettingsUI com = new SettingsUI();
-        // this.uiComponent = com;
+        GameSettings com = new GameSettings();
+        this.uiComponent = com;
     }
 
     public void quitGame() {
