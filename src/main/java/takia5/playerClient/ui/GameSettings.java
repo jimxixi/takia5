@@ -1,5 +1,7 @@
 package takia5.playerClient.ui;
 
+import java.util.HashMap;
+
 import imgui.ImGui;
 
 public class GameSettings extends NinePatchDiv {
@@ -15,6 +17,14 @@ public class GameSettings extends NinePatchDiv {
         }
         ImGui.end();
     }
-    
+
+    public HashMap<String, String> loadConfig() {
+        HashMap<String, String> result = new HashMap<>();
+        return result;
+    }
+
+    public void dumpConfig(HashMap<String, String> config) {
+
+    }
 
 }
